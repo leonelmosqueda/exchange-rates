@@ -67,6 +67,11 @@ a {
 
 .main {
     flex: 1;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer {
@@ -84,8 +89,66 @@ a {
 }
 
 .footer .link:hover {
-    color: black;
+    color: var(--main-color);
     background-color: #06bee1;
     background-image: linear-gradient(0deg, #06bee1 0%, #ffffff 50%, #06bee1 100%);
     box-shadow: 0 0 15px 0 #06BEE1;
+}
+
+.container {
+    width: 70%;
+    height: 70%;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 4em 1em var(--main-color);
+    overflow: hidden;
+    padding: .5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.select-currency {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em;
+}
+
+.container-select {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.select {
+    height: 2.5em;
+    width: 11em;
+    background-color: inherit;
+    color: inherit;
+    border: solid var(--secondary-color);
+    border-radius: calc(var(--border-radius) / 2);
+    font-size: 1em;
+    font-weight: 700;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-swap {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    margin-top: 2em;
+    background-color: inherit;
+    color: inherit;
+    border: solid var(--secondary-color);
+    font-size: 1em;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+.btn-swap:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
 }

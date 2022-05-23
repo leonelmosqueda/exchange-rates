@@ -28,7 +28,7 @@
                             <option value=""></option>
                         </select>
                     </div>
-                    <button type="button" class="btn-swap" data-btn-swap>⇄</button>
+                    <button type="button" class="btn-swap" data-btn-swap>&rightleftarrows;</button>
                     <div class="container-select">
                         <label for="to-currency">To</label>
                         <select name="to-currency" id="to-currency" class="select">
@@ -47,11 +47,33 @@
                     </div>
                 </div>
                 <div class="btn-container">
-                    <button type="submit" class="btn-convert" id="btn-convert">Convert</button>
+                    <button type="submit" class="btn-convert" data-modal-target="#modal">Convert</button>
                 </div>
-                <div class="result-container"></div>
+                <div class="result-conversion hidden">
+                    <p class="hidden"><span id="text-error"></span></p>
+                    <p class="base hidden"><span id="amount-value"></span> <span id="base-symbol" class="success-color"></span> (<span id="base-name"></span>) = </p>
+                    <p class="converted hidden"><span id="converted-value"></span> <span id="converted-symbol" class="success-color"></span> (<span id="converted-name"></span>)</p>
+                </div>
             </form>
-    </main>
+        </main>
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="left">
+                    <button class="back-button" data-back-button><img src="./img/arrow-left-solid.svg"></button>
+                </div>
+                <div class="middle">
+                    <p class="amount-header"></p>
+                </div>
+                <div class="right">
+                    <div class="date-header"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div id="overlay"></div>
     <footer class="footer">
         <p class="text-footer">for <a href="https://argentinaprograma.com" class="link">r/argentina-programa</a></p>
     </footer>

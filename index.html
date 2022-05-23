@@ -36,7 +36,16 @@
                         </select>
                     </div>
                 </div>
-                <div class="currency-setting"></div>
+                <div class="currency-setting">
+                    <div class="container-input">
+                        <label for="amount">Amount</label>
+                        <input type="number" inputmode="decimal" step="0.01" name="amount" id="amount" class="input" value="1.00">
+                    </div>
+                    <div class="container-input">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" class="input input-date" min="1999-01-04">
+                    </div>
+                </div>
                 <div class="btn-container"></div>
                 <div class="result-container"></div>
             </form>

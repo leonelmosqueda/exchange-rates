@@ -108,20 +108,23 @@ a {
     flex-direction: column;
 }
 
-.select-currency {
+.select-currency,
+.currency-setting {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2em;
+    margin: 1.5em;
 }
 
-.container-select {
+.container-select,
+.container-input {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.select {
+.select,
+.input {
     height: 2.5em;
     width: 11em;
     background-color: inherit;
@@ -151,4 +154,19 @@ a {
 .btn-swap:hover {
     background-color: var(--secondary-color);
     color: var(--main-color);
+}
+
+.input-date {
+    font-size: 1.2em;
+    color-scheme: dark;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
 }

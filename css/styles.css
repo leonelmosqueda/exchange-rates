@@ -96,8 +96,8 @@ a {
 }
 
 .container {
-    width: 70%;
-    height: 70%;
+    width: 70vw;
+    height: 70vh;
     background-color: var(--main-color);
     color: var(--secondary-color);
     border-radius: var(--border-radius);
@@ -113,7 +113,8 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1.5em;
+    margin: 1.5em 7em;
+    flex-wrap: wrap;
 }
 
 .container-select,
@@ -121,10 +122,12 @@ a {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    flex-wrap: wrap;
 }
 
 .select,
-.input {
+.input,
+.btn-convert {
     height: 2.5em;
     width: 11em;
     background-color: inherit;
@@ -169,4 +172,16 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.btn-convert:hover {
+    background-color: var(--hover-color);
+    border: solid var(--hover-color)
 }

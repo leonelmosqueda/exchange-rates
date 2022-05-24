@@ -131,8 +131,8 @@ a {
 .btn-convert {
     height: 2.5em;
     width: 11em;
-    background-color: inherit;
-    color: inherit;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
     border: solid var(--secondary-color);
     border-radius: calc(var(--border-radius) / 2);
     font-size: 1em;

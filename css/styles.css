@@ -90,3 +90,132 @@ body {
     background-image: linear-gradient(0deg, #06bee1 0%, #ffffff 50%, #06bee1 100%);
     box-shadow: 0 0 15px 0 #06BEE1;
 }
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
+}
+
+.main .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 4em 1em var(--main-color);
+    overflow: hidden;
+    padding: 1.5em;
+}
+
+.select-currency,
+.currency-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5em;
+    flex-wrap: wrap;
+}
+
+.container-select,
+.container-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.select,
+.input,
+.btn-convert {
+    height: 2.5em;
+    width: 11em;
+    border: solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    background-color: inherit;
+    color: inherit;
+    font-size: 1em;
+    font-weight: 700;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.text-error {
+    height: 16px;
+    color: var(--error-color);
+    font-size: .8em;
+}
+
+.btn-swap {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-color: inherit;
+    color: inherit;
+    border: solid var(--secondary-color);
+    font-size: 1em;
+    font-weight: 900;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-swap:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}
+
+.input-date {
+    font-size: 1.2em;
+    color-scheme: dark;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+.convert-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-convert:hover {
+    color: var(--secondary-color);
+    background-color: var(--hover-color);
+    border: solid var(--hover-color);
+}
+
+.result-conversion {
+    display: flex;
+    flex-direction: column;
+    margin: 1em auto;
+    gap: .5em;
+}
+
+.base-currency {
+    font-size: .9em;
+    font-weight: 400;
+}
+
+.converted-currency {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.success-color {
+    color: var(--success-color);
+}
+
+.hidden {
+    display: none;
+}

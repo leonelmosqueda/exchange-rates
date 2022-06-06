@@ -13,67 +13,68 @@
         <div class="left">
             <h1 class="title">Exchange Rates</h1>
         </div>
-        <div class="right">
-            <ul class="links">
-                <li><a href="https://github.com/leonelmosqueda">GitHub</a></li>
-            </ul>
-        </div>
+        <ul class="right">
+            <li><a href="https://github.com/leonelmosqueda">GitHub</a></li>
+        </ul>
     </header>
     <main class="main">
-            <form method="get" class="container">
-                <div class="select-currency">
-                    <div class="container-select">
-                        <label for="from-currency">From</label>
-                        <select name="from-currency" id="from-currency" class="select">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn-swap" data-btn-swap>&rightleftarrows;</button>
-                    <div class="container-select">
-                        <label for="to-currency">To</label>
-                        <select name="to-currency" id="to-currency" class="select">
-                            <option value=""></option>
-                        </select>
-                    </div>
+        <form method="get" class="form-container" name="exchange-rates">
+            <div class="select-currency">
+                <div class="container-select">
+                    <label for="from-currency">From currency</label>
+                    <select name="from-currency" id="from-currency" class="select">
+                        <option value=""></option>
+                    </select>
+                    <p class="text-error"></p>
                 </div>
-                <div class="currency-setting">
-                    <div class="container-input">
-                        <label for="amount">Amount</label>
-                        <input type="number" inputmode="decimal" step="0.01" name="amount" id="amount" class="input" value="1.00">
-                    </div>
-                    <div class="container-input">
-                        <label for="date">Date</label>
-                        <input type="date" name="date" id="date" class="input input-date" min="1999-01-04">
-                    </div>
-                </div>
-                <div class="btn-container">
-                    <button type="submit" class="btn-convert" data-modal-target="#modal">Convert</button>
-                </div>
-                <div class="result-conversion hidden">
-                    <p class="hidden"><span id="text-error"></span></p>
-                    <p class="base hidden"><span id="amount-value"></span> <span id="base-symbol" class="success-color"></span> (<span id="base-name"></span>) = </p>
-                    <p class="converted hidden"><span id="converted-value"></span> <span id="converted-symbol" class="success-color"></span> (<span id="converted-name"></span>)</p>
-                </div>
-            </form>
-        </main>
-        <div class="modal" id="modal">
-            <div class="modal-header">
-                <div class="left">
-                    <button class="back-button" data-back-button><img src="./img/arrow-left-solid.svg"></button>
-                </div>
-                <div class="middle">
-                    <p class="amount-header"></p>
-                </div>
-                <div class="right">
-                    <div class="date-header"></div>
+                <button type="button" name="btn-swap" class="btn-swap" data-button="swap">&rightleftarrows;</button>
+                <div class="container-select">
+                    <label for="to-currency">To currency</label>
+                    <select name="to-currency" id="to-currency" class="select">
+                        <option value=""></option>
+                    </select>
+                    <p class="text-error"></p>
                 </div>
             </div>
-            <div class="modal-body">
-                <ul>
-                </ul>
+            <div class="currency-settings">
+                <div class="container-input">
+                    <label for="amount">Amount</label>
+                    <input type="number" inputmode="decimal" name="amount" id="amount" class="input" step="0.01">
+                    <p class="text-error"></p>
+                </div>
+                <div class="container-input">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" id="date" class="input input-date" min="1999-01-04">
+                    <p class="text-error"></p>
+                </div>
+            </div>
+            <div class="convert-btn">
+                <button type="submit" name="btn-convert" class="button btn-convert" data-button="convert">Convert</button>
+            </div>
+            <div class="result-conversion hidden">
+                <p class="base-currency"><span id="amount-value"></span> <span id="base-symbol" class="success-color"></span> (<span id="base-name-currency"></span>) = </p>
+                <p class="converted-currency"><span id="converted-value"></span> <span id="converted-symbol" class="success-color"></span> (<span id="converted-name"></span>)</p>
+            </div>
+        </form>
+    </main>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="left">
+                <button class="back-button" data-button="back"><img src="./img/arrow-left-solid.svg"></button>
+            </div>
+            <div class="middle">
+                <p class="amount-header"></p>
+            </div>
+            <div class="right">
+                <div class="date-header"></div>
             </div>
         </div>
-        <div id="overlay"></div>
+        <div class="modal-body">
+            <ul id="list">
+            </ul>
+        </div>
+    </div>
+    <div id="overlay"></div>
     <footer class="footer">
         <p class="text-footer">for <a href="https://argentinaprograma.com" class="link">r/argentina-programa</a></p>
     </footer>

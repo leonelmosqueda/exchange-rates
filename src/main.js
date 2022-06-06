@@ -21,7 +21,7 @@ async function setInitialSetup () {
 }
 
 function getCurrentDate () {
-    return date = `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate()}`
+    return date = `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 }
 
 function setCurrentDate (date) {

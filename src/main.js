@@ -5,9 +5,9 @@ let currenciesName;
 
 const today = new Date();
 
-const $inputDate = document.querySelector('#date');
-const $selectFrom = document.querySelector('#from-currency');
-const $selectTo = document.querySelector('#to-currency');
+const $form = document.querySelector("form[name='exchange-rates']");
+
+const $convertButton = $form['btn-convert'];
 
 async function setInitialSetup () {
     const currentDate = getCurrentDate(today);
@@ -25,11 +25,13 @@ function getCurrentDate () {
 }
 
 function setCurrentDate (date) {
-    $inputDate.value = date;
+    const $date = $form.date;
+    $date.value = date;
 }
 
 function setMaxDate (date) {
-    $inputDate.max = date;
+    const $date = $form.date;
+    $date.max = date;
 }
 
 async function getData(endpoint) {
@@ -60,10 +62,37 @@ function createOptions (names, symbols) {
 }
 
 function setOptions (options) {
+    const $selectFrom = $form['from-currency'];
+    const $selectTo = $form['to-currency'];
+
     options.forEach(option => {
         $selectFrom.appendChild(option.cloneNode(true));
         $selectTo.appendChild(option);
     });
+}
+
+$convertButton.addEventListener('click', event => {
+    event.preventDefault();
+    validateForm();
+});
+
+function validateForm() {
+    const fromCurrency = $form['from-currency'].value;
+    const amount = $form.amount.value;
+    const date = $form.date.value;
+
+    const errorFromCurrency = validateFromCurrency(fromCurrency);
+    const errorAmount = validateAmount(amount);
+    const errorDate = validateDate(date);
+
+    const errors = {
+        'from-currency': errorFromCurrency,
+        amount: errorAmount,
+        date: errorDate 
+    }
+
+    console.log(errors);
+
 }
 
 setInitialSetup();

@@ -31,7 +31,7 @@ function validateDate (date) {
         return "Date cannot be earlier than 1999-01-04";
     }
 
-    if (Date.parse(date) >= Date.parse(getCurrentDate(today))) {
+    if (Date.parse(date) > Date.parse(getCurrentDate(today))) {
         return "Date cannot be later than today";
     }
 

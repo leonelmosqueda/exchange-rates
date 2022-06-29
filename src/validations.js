@@ -15,7 +15,7 @@ function validateAmount (amount) {
         return "Amount cannot be less than or equal to zero";
     }
 
-    if (/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(amount)) {
+    if (!/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(amount)) {
         return "Amount only accepts whole numbers and decimals";
     }
     
@@ -23,6 +23,10 @@ function validateAmount (amount) {
 }
 
 function validateDate (date) {
+    if (date === '') {
+        return "Date cannot be empty";
+    }
+    
     if(!/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(date)) { 
         return "Date only supports YYYY-MM-DD format";
     }

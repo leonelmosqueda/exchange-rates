@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <script type="text/javascript" src="./src/main.js" defer></script>
     <script type="text/javascript" src="./src/validations.js" defer></script>
+    <script type="text/javascript" src="./src/tests.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -27,7 +28,7 @@
                     <select name="from-currency" id="from-currency" class="select">
                         <option value=""></option>
                     </select>
-                    <p class="text-error"></p>
+                    <p class="text-error" data-error="from-currency"></p>
                 </div>
                 <button type="button" name="btn-swap" class="btn-swap" data-button="swap">&rightleftarrows;</button>
                 <div class="container-select">
@@ -35,19 +36,19 @@
                     <select name="to-currency" id="to-currency" class="select">
                         <option value=""></option>
                     </select>
-                    <p class="text-error"></p>
+                    <p class="text-error" data-error="to-currency"></p>
                 </div>
             </div>
             <div class="currency-settings">
                 <div class="container-input">
                     <label for="amount">Amount</label>
                     <input type="number" inputmode="decimal" name="amount" id="amount" class="input" step="0.01">
-                    <p class="text-error"></p>
+                    <p class="text-error" data-error="amount"></p>
                 </div>
                 <div class="container-input">
                     <label for="date">Date</label>
                     <input type="date" name="date" id="date" class="input input-date" min="1999-01-04">
-                    <p class="text-error"></p>
+                    <p class="text-error" data-error="date"></p>
                 </div>
             </div>
             <div class="convert-btn">

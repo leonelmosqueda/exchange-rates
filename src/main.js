@@ -73,10 +73,15 @@ function setOptions (options) {
 
 $convertButton.addEventListener('click', event => {
     event.preventDefault();
-    validateForm();
+    if (validateForm()) {
+        // do things
+    } else {
+        return;
+    }
 });
 
 function validateForm() {
+    removePreviousErrors();
     const fromCurrency = $form['from-currency'].value;
     const amount = $form.amount.value;
     const date = $form.date.value;
@@ -91,8 +96,51 @@ function validateForm() {
         date: errorDate 
     }
 
-    console.log(errors);
+    return handleErrors(errors) === 0;
+}
 
+function removePreviousErrors() {
+    const $errors = document.querySelectorAll(`[data-error]`);
+    $errors.forEach(error => {
+        error.textContent = '';
+    });
+}
+
+function handleErrors(errors) {
+    let errorCounter = 0;
+    const keys = Object.keys(errors);
+
+    keys.forEach(key => {
+        const error = errors[key]
+        const $error = document.querySelector(`[data-error="${key}"]`);
+        
+        if (error) {
+            errorCounter++;
+            $error.textContent = error;
+            highlightField(key)
+        } else {
+            $error.textContent = '';
+            removeHighlightedField(key);
+        }
+    });
+    
+    return errorCounter;
+}
+
+function highlightField (key) {
+    const element = $form[`${key}`];
+    const parentElement = element.parentElement;
+
+    element.classList.add('error');
+    parentElement.classList.add('error');
+}
+
+function removeHighlightedField(key) {
+    const element = $form[`${key}`];
+    const parentElement = element.parentElement;
+
+    element.classList.remove('error');
+    parentElement.classList.remove('error');
 }
 
 setInitialSetup();

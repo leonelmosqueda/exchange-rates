@@ -83,6 +83,11 @@ $convertButton.addEventListener('click', async event => {
     const endpoint = getEndpoint(date, fromCurrency, toCurrency, amount);
 
     const data = await getData(endpoint);
+
+    
+    if (!toCurrency) showAllCurrencyExchanges(data);
+
+    //showCurrencyExchange(data);
 });
 
 function validateForm() {
@@ -153,5 +158,79 @@ function getEndpoint(date, from, to, amount) {
 
     return `/${date}?from=${from}&to=${to}&amount=${amount}`;
 }
+
+function showAllCurrencyExchanges(data) {
+    setHeaderInformation(data);
+    setCurrencyExchanges(data)
+    openPopUp();
+}
+
+function openPopUp() {
+    const modal = document.querySelector('#modal');
+    const overlay = document.querySelector('#overlay');
+
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function setHeaderInformation(data) {
+    const headerAmount = document.querySelector('#amount-header')
+    const headerDate = document.querySelector('#date-header');
+
+    headerAmount.textContent = `${data.amount} ${data.base}`;
+    headerDate.textContent = `${data.date}`;
+}
+
+function setCurrencyExchanges(data) {
+    const currenciesValue = Object.values(data.rates);
+    const list = document.querySelector('#list');
+    let increment = 0
+
+    for (let i = 0; i < currenciesSymbol.length - 1; i++) {
+        if (currenciesSymbol[i] === data.base) {
+            increment++;
+        }
+        
+        const listItem = createListItem(currenciesValue[i], i, increment);
+        list.appendChild(listItem);
+    }
+}
+
+function createListItem(value, index, increment) {
+    const element = document.createElement('li');
+    element.textContent = `${value} ${currenciesSymbol[index + increment]} (${currenciesName[index + increment]})`;
+    return element;
+}
+
+const backButton = document.querySelector('[data-button="back"]');
+
+backButton.addEventListener('click', () => {
+   clearModal();
+   hideModal();
+});
+
+function clearModal() {
+    const amountHeader = document.querySelector('#amount-header');
+    const dateHeader = document.querySelector('#date-header');
+    const listItems = document.querySelectorAll('#list li');
+    
+    amountHeader.textContent = "";
+    dateHeader.textContent = "";
+
+    listItems.forEach(listItem => {
+        listItem.remove();
+    })
+
+
+}
+
+function hideModal() {
+    const modal = document.querySelector('#modal');
+    const overlay = document.querySelector('#overlay');
+
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
 
 setInitialSetup();

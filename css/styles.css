@@ -144,6 +144,11 @@ body {
     cursor: pointer;
 }
 
+.select {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+}
+
 .text-error {
     height: 16px;
     color: var(--error-color);
@@ -283,7 +288,7 @@ input[type=number] {
 }
 
 .modal-body ul li:hover {
-    background-color: var(--hover-color);
+    background-color: var(--success-color);
 }
 
 ::-webkit-scrollbar {
@@ -300,6 +305,7 @@ input[type=number] {
 .error {
     border-color: var(--error-color);
     color: var(--error-color);
+    transition: .5s all;
 }
 
 .hidden {

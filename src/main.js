@@ -81,13 +81,8 @@ $convertButton.addEventListener('click', async event => {
     const date = $form.date.value;
 
     const endpoint = getEndpoint(date, fromCurrency, toCurrency, amount);
+
     const data = await getData(endpoint);
-    console.log(data);
-
-    if (!toCurrency) showAllCurrencyExchanges();
-    
-    showCurrencyExchange();
-
 });
 
 function validateForm() {

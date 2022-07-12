@@ -71,13 +71,23 @@ function setOptions (options) {
     });
 }
 
-$convertButton.addEventListener('click', event => {
+$convertButton.addEventListener('click', async event => {
     event.preventDefault();
-    if (validateForm()) {
-        // do things
-    } else {
-        return;
-    }
+    if (!validateForm()) return;
+
+    const fromCurrency = $form['from-currency'].value;
+    const toCurrency = $form['to-currency'].value;
+    const amount = $form.amount.value;
+    const date = $form.date.value;
+
+    const endpoint = getEndpoint(date, fromCurrency, toCurrency, amount);
+    const data = await getData(endpoint);
+    console.log(data);
+
+    if (!toCurrency) showAllCurrencyExchanges();
+    
+    showCurrencyExchange();
+
 });
 
 function validateForm() {
@@ -141,6 +151,12 @@ function removeHighlightedField(key) {
 
     element.classList.remove('error');
     parentElement.classList.remove('error');
+}
+
+function getEndpoint(date, from, to, amount) {
+    if (!to) return `/${date}?from=${from}&amount=${amount}`;
+
+    return `/${date}?from=${from}&to=${to}&amount=${amount}`;
 }
 
 setInitialSetup();

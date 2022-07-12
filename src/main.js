@@ -85,9 +85,9 @@ $convertButton.addEventListener('click', async event => {
     const data = await getData(endpoint);
 
     
-    if (!toCurrency) showAllCurrencyExchanges(data);
+    if (!toCurrency) return showAllCurrencyExchanges(data);
 
-    //showCurrencyExchange(data);
+    showCurrencyExchange(data);
 });
 
 function validateForm() {
@@ -160,6 +160,8 @@ function getEndpoint(date, from, to, amount) {
 }
 
 function showAllCurrencyExchanges(data) {
+    clearResults();
+    clearModal();
     setHeaderInformation(data);
     setCurrencyExchanges(data)
     openPopUp();
@@ -232,5 +234,26 @@ function hideModal() {
     overlay.classList.remove('active');
 }
 
+function showCurrencyExchange(data) {
+    clearResults()
+    setCurrencyExchange(data);
+    showResults();
+}
+
+function setCurrencyExchange(data) {
+    document.querySelector('[data-base="amount"]').textContent = data.amount;
+    document.querySelector('[data-base="symbol"]').textContent = data.base;
+
+    document.querySelector('[data-converted="value"]').textContent = Object.values(Object.values(data.rates));
+    document.querySelector('[data-converted="symbol"]').textContent = Object.keys(data.rates);   
+}
+
+function showResults() {
+    document.querySelector("#result").classList.remove('hidden');
+}
+
+function clearResults() {
+    document.querySelector("#result").classList.add('hidden');
+}
 
 setInitialSetup();

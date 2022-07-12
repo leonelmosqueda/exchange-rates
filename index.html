@@ -54,9 +54,9 @@
             <div class="convert-btn">
                 <button type="submit" name="btn-convert" class="button btn-convert" data-button="convert">Convert</button>
             </div>
-            <div class="result-conversion hidden">
-                <p class="base-currency"><span id="amount-value"></span> <span id="base-symbol" class="success-color"></span> (<span id="base-name-currency"></span>) = </p>
-                <p class="converted-currency"><span id="converted-value"></span> <span id="converted-symbol" class="success-color"></span> (<span id="converted-name"></span>)</p>
+            <div class="result-conversion hidden" id="result">
+                <p class="base-currency"><span data-base="amount" id="amount-value"></span> <span data-base="symbol" id="base-symbol" class="success-color"></span> = </p>
+                <p class="converted-currency"><span data-converted="value"></span> <span data-converted="symbol" class="success-color"></span></p>
             </div>
         </form>
     </main>

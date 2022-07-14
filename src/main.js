@@ -35,8 +35,10 @@ function setMaxDate (date) {
 }
 
 async function getData(endpoint) {
-    const response = await fetch(`${URL_API + endpoint}`);
-    return await response.json();
+    const response = await fetch(`${URL_API + endpoint}`)
+                                .then(response => response.json())
+                                .catch(error => console.error(error))
+    return await response;
 }
 
 function getCurrenciesSymbol(object) {

@@ -258,4 +258,18 @@ function clearResults() {
     document.querySelector("#result").classList.add('hidden');
 }
 
+const swapButton = document.querySelector('[data-button="swap"]');
+
+function swapCurrencies() {
+    const from = $form['from-currency'];
+    const to = $form['to-currency']; 
+    let temp;
+
+    temp = from.value;
+    from.value = to.value;
+    to.value = temp;
+}
+
+swapButton.addEventListener('click', swapCurrencies)
+
 setInitialSetup();

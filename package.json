@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "http-server -c-1"
+    "server": "http-server -c-1",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/leonelmosqueda/exchange-rates/issues"
   },
-  "homepage": "https://github.com/leonelmosqueda/exchange-rates#readme"
+  "homepage": "https://github.com/leonelmosqueda/exchange-rates#readme",
+  "devDependencies": {
+    "cypress": "^10.3.0"
+  }
 }

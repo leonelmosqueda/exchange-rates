@@ -14,10 +14,6 @@ function validateAmount (amount) {
     if (amount <= 0) {
         return "Amount cannot be less than or equal to zero";
     }
-
-    if (!/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(amount)) {
-        return "Amount only accepts whole numbers and decimals";
-    }
     
     return "";
 }

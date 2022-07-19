@@ -22,11 +22,6 @@ function testValidateAmount() {
     );
 
     console.assert(
-        validateAmount('ten') === "Amount only accepts whole numbers and decimals",
-        'Validate amount did not validate that the amount is not a whole number or decimal'
-    );
-
-    console.assert(
         validateAmount('1.5') === "",
         'Validate amount failed with correct amount'
     );

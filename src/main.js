@@ -42,7 +42,6 @@ async function getData(endpoint) {
 
 function createOptions (currencies) {
     let options = [];
-    debugger
 
     Object.keys(currencies).forEach((symbol, index) => {
         const newOption = document.createElement('option');

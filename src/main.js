@@ -1,7 +1,6 @@
 const URL_API = "https://api.frankfurter.app";
 
-let currenciesSymbol;
-let currenciesName;
+let currencies;
 
 const today = new Date();
 
@@ -13,10 +12,8 @@ async function setInitialSetup () {
     const currentDate = getCurrentDate(today);
     setCurrentDate(currentDate);
     setMaxDate(currentDate);
-    const currencies = await getData('/currencies');
-    getCurrenciesSymbol(currencies);
-    getCurrenciesName(currencies);
-    const options = createOptions(currenciesName, currenciesSymbol);
+    currencies = await getData('/currencies');
+    const options = createOptions(currencies);
     setOptions(options);
 }
 
@@ -35,27 +32,22 @@ function setMaxDate (date) {
 }
 
 async function getData(endpoint) {
-    const response = await fetch(`${URL_API + endpoint}`)
-                                .then(response => response.json())
-                                .catch(error => console.error(error))
-    return await response;
+    try {
+        const response = await fetch(`${URL_API + endpoint}`);
+        return response.json();
+    } catch (e) {
+        return console.error(e)
+    }
 }
 
-function getCurrenciesSymbol(object) {
-    return currenciesSymbol = Object.keys(object);
-}
-
-function getCurrenciesName (object) {
-    return currenciesName = Object.values(object);
-}
-
-function createOptions (names, symbols) {
+function createOptions (currencies) {
     let options = [];
+    debugger
 
-    names.forEach((name, index) => {
+    Object.keys(currencies).forEach((symbol, index) => {
         const newOption = document.createElement('option');
-        newOption.textContent = name
-        newOption.value = `${symbols[index]}`;
+        newOption.textContent = Object.values(currencies)[index];
+        newOption.value = `${symbol}`;
 
         options.push(newOption);
     });
@@ -190,8 +182,8 @@ function setCurrencyExchanges(data) {
     const list = document.querySelector('#list');
     let increment = 0
 
-    for (let i = 0; i < currenciesSymbol.length - 1; i++) {
-        if (currenciesSymbol[i] === data.base) {
+    for (let i = 0; i < Object.keys(currencies).length - 1; i++) {
+        if (Object.keys(currencies)[i] === data.base) {
             increment++;
         }
         
@@ -202,7 +194,7 @@ function setCurrencyExchanges(data) {
 
 function createListItem(value, index, increment) {
     const element = document.createElement('li');
-    element.textContent = `${value} ${currenciesSymbol[index + increment]} (${currenciesName[index + increment]})`;
+    element.textContent = `${value} ${Object.keys(currencies)[index + increment]} (${Object.values(currencies)[index + increment]})`;
     return element;
 }
 

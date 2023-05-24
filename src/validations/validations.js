@@ -1,4 +1,6 @@
-function validateFromCurrency (fromCurrency) {
+import { getCurrentDate, today } from '../utilities/utilities.js';
+
+export function validateFromCurrency (fromCurrency) {
     if (fromCurrency === '') {
         return "You must select a currency"
     }
@@ -6,7 +8,7 @@ function validateFromCurrency (fromCurrency) {
     return "";
 }
 
-function validateAmount (amount) {
+export function validateAmount (amount) {
     if (amount === '') {
         return "Amount cannot be empty";
     }
@@ -18,7 +20,7 @@ function validateAmount (amount) {
     return "";
 }
 
-function validateDate (date) {
+export function validateDate (date) {
     if (date === '') {
         return "Date cannot be empty";
     }

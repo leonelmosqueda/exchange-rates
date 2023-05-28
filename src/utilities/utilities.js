@@ -6,11 +6,20 @@ export function getCurrentDate() {
 
 export function getInputValues() {
   const fromCurrency = document.querySelector('#from-currency').value;
-  const toCurrency = document.querySelector('#to-currency').value;
+  const toCurrency = document.querySelector('#to-currency').value || null;
   const amount = document.querySelector('#amount').value;
   const date = document.querySelector('#date').value;
 
-  return { fromCurrency, toCurrency, amount, date };
+  return {
+    fromCurrency,
+    toCurrency,
+    amount,
+    date 
+  };
+}
+
+export function generateUniqueKey(from, to, amount, date) {
+  return `${from}-${to}-${amount}-${date}`;
 }
 
 export function getEndpoint(from, to, amount, date) {

@@ -12,62 +12,67 @@ export function setMaxDate(date) {
   $form.date.max = date;
 }
 
-export function createOptionElements(optionsData) {
-  return Object.keys(optionsData).map((symbol) => {
-    const newOption = document.createElement('option');
-    newOption.textContent = optionsData[symbol];
-    newOption.value = symbol;
-    return newOption;
-  })
+/**
+ * @param {object} optionsData - The data used to generate option elements.
+ * @return {array} An array of option elements.
+ */
+
+export function createOptions(optionsData) {
+  return optionsData.names.map((name, index) => {
+    const optionElement = document.createElement('option');
+    optionElement.textContent = name;
+    optionElement.value = optionsData.codes[index];
+    return optionElement;
+  });
 }
 
 export function configureCurrencyOptions(options) {
-  const $selectFrom = $form['from-currency'];
-  const $selectTo = $form['to-currency'];
+  const $fromCurrencySelect = document.querySelector('#from-currency');
+  const $toCurrencySelect = document.querySelector('#to-currency');
 
   options.forEach(option => {
-    $selectFrom.appendChild(option);
-    $selectTo.append(option.cloneNode(true));
+    $fromCurrencySelect.appendChild(option);
+    $toCurrencySelect.appendChild(option.cloneNode(true));
   });
 }
 
 function removePreviousErrors() {
-  const $errors = document.querySelectorAll('[data-error]');
-  $errors.forEach($error => {
-    $error.textContent = '';
+  const $errorElements = document.querySelectorAll('[data-error]');
+  $errorElements.forEach(element => {
+    element.textContent = '';
   });
 }
 
-function highlightField(key) {
-  const $element = $form[`${key}`];
-  const $parentElement = $element.parentElement;
+function highlightField(fieldName) {
+  const $fieldElement = $form[fieldName];
+  const $parentElement = $fieldElement.parentElement;
 
-  $element.classList.add('error');
+  $fieldElement.classList.add('error');
   $parentElement.classList.add('error');
 }
 
 function removeHighlightedField(key) {
-  const $element = $form[`${key}`];
-  const $parentElement = $element.parentElement;
+  const $fieldElement = $form[`${key}`];
+  const $parentElement = $fieldElement.parentElement;
 
-  $element.classList.remove('error');
+  $fieldElement.classList.remove('error');
   $parentElement.classList.remove('error');
 }
 
 function handleErrors(errors) {
   let errorCounter = 0;
-  const keys = Object.keys(errors);
+  const errorKeys = Object.keys(errors);
 
-  keys.forEach(key => {
+  errorKeys.forEach(key => {
     const error = errors[key];
-    const $error = document.querySelector(`[data-error="${key}"]`);
+    const $errorElement = document.querySelector(`[data-error="${key}"]`);
 
-    if(error) {
-      errorCounter += 1;
-      $error.textContent = error;
+    if (error) {
+      errorCounter++;
+      $errorElement.textContent = error;
       highlightField(key);
     } else {
-      $error.textContent = '';
+      $errorElement.textContent = '';
       removeHighlightedField(key);
     }
   });
@@ -75,15 +80,16 @@ function handleErrors(errors) {
   return errorCounter;
 }
    
-export function validateForm() {
+export function isFormValid() {
   removePreviousErrors();
-  const $fromCurrency = $form['from-currency'].value;
-  const $amount = $form.amount.value;
-  const $date = $form.date.value;
 
-  const errorFromCurrency = validateFromCurrency($fromCurrency);
-  const errorAmount = validateAmount($amount);
-  const errorDate = validateDate($date);
+  const fromCurrency = $form['from-currency'].value;
+  const amount = $form.amount.value;
+  const date = $form.date.value;
+
+  const errorFromCurrency = validateFromCurrency(fromCurrency);
+  const errorAmount = validateAmount(amount);
+  const errorDate = validateDate(date);
 
   const errors = {
     'from-currency': errorFromCurrency,
@@ -95,13 +101,13 @@ export function validateForm() {
 }
 
 function swapCurrencies() {
-  const $from = $form['from-currency'];
-  const $to = $form['to-currency']; 
-  let $temp;
+  const $fromCurrencyInput = $form['from-currency'];
+  const $toCurrencyInput = $form['to-currency'];
+  let temp;
 
-  $temp = $from.value;
-  $from.value = $to.value;
-  $to.value = $temp;
+  temp = $fromCurrencyInput.value;
+  $fromCurrencyInput.value = $toCurrencyInput.value;
+  $toCurrencyInput.value = temp;
 }
 
 $swapButton.addEventListener('click', swapCurrencies);

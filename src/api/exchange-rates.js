@@ -1,13 +1,13 @@
-const URL_API = 'https://api.frankfurter.app';
+const URL_BASE = 'https://api.frankfurter.app';
 
 export async function fetchCurrencies() {
-  const url = `${URL_API}/currencies`;
-  const response = await fetch(url);
+  const apiUrl = `${URL_BASE}/currencies`;
+  const response = await fetch(apiUrl);
   return response.json();
 }
 
 export async function fetchRates(endpoint) {
-  const url = `${URL_API}${endpoint}`;
-  const response = await fetch(url);
+  const apiUrl = `${URL_BASE}${endpoint}`;
+  const response = await fetch(apiUrl);
   return response.json();
 }

@@ -1,28 +1,35 @@
 import { fetchCurrencies, fetchRates } from './services/exchange-rates.js';
-import { showCurrencyExchange } from './ui/exchange-results.js';
-import { configureCurrencyOptions, createOptionElements, setCurrentDate, setMaxDate, validateForm } from './ui/inputs.js';
-import { showAllCurrencyExchanges } from './ui/modal.js';
-import { getCurrentDate, getInputValues } from './utilities/utilities.js';
+import { displayConversion } from './ui/exchange-results.js';
+import { configureCurrencyOptions, createOptions, setCurrentDate, setMaxDate, isFormValid } from './ui/inputs.js';
+import { displayCurrencyExchange } from './ui/modal.js';
+import { getCurrentDate, getValues } from './utilities/utilities.js';
 
 let currencies;
 
 async function showResults(event) {
   event.preventDefault();
-  if (!validateForm()) return;
 
-  const inputValues = getInputValues();
-  const rates = await fetchRates(inputValues);  
+  if (!isFormValid()) {
+    return;
+  }
 
-  if(inputValues.toCurrency === null) return showAllCurrencyExchanges(rates);
-  showCurrencyExchange(rates);
+  const values = getValues();
+  const rates = await fetchRates(values);
+
+  if (values.toCurrency === null) {
+    displayCurrencyExchange(rates);
+  } else {
+    displayConversion(rates);
+  }
 }
 
 export async function init() {
-  const currentDate = getCurrentDate();
-  setCurrentDate(currentDate);
-  setMaxDate(currentDate);
+  const date = getCurrentDate();
+  setCurrentDate(date);
+  setMaxDate(date);
+
   currencies = await fetchCurrencies();
-  configureCurrencyOptions(createOptionElements(currencies));
+  configureCurrencyOptions(createOptions(currencies));
 
   const $convertButton = document.querySelector('[data-button="convert"]');
   $convertButton.addEventListener('click', showResults);

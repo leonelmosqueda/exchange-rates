@@ -1,66 +1,66 @@
 import { currencies } from '../exchange-rates.js';
+import { getCurrencyName } from '../utilities/utilities.js';
 
-const $modal = document.querySelector('#modal');
-const $overlay = document.querySelector('#overlay');
+const $modalElement = document.querySelector('#modal');
+const $overlayElement = document.querySelector('#overlay');
 const $amountHeader = document.querySelector('#amount-header');
 const $dateHeader = document.querySelector('#date-header');
 const $list = document.querySelector('#list');
 
 function clearResults() {
-  document.querySelector('#result').classList.add('hidden');
+  const $resultElement = document.querySelector('#result');
+  $resultElement.classList.add('hidden');
 }
 
 function clearModal() {
-  const $listItems = $list.querySelectorAll('li');
+  const $listItems = document.querySelectorAll('li');
 
   $amountHeader.textContent = '';
   $dateHeader.textContent = '';
   $listItems.forEach((item) => item.remove());
 }
 
-function setHeaderInformation(data) {
-  $amountHeader.textContent = `${data.amount} ${data.base}`;
-  $dateHeader.textContent = `${data.date}`;
+function setHeaderInfo(data) {
+  const { amount, base, date } = data;
+  $amountHeader.textContent = `${amount} ${base}`;
+  $dateHeader.textContent = `${date}`;
 }
 
-function createListItem(value, index, increment) {
-  const listItem = document.createElement('li');
-  listItem.textContent = `${value} ${Object.keys(currencies)[index + increment]} (${Object.values(currencies)[index + increment]})`;
-  return listItem;
+function createListItem(currencyValue, currencySymbol) {
+  const $listItem = document.createElement('li');
+  $listItem.textContent = `${currencyValue} ${currencySymbol} (${getCurrencyName(currencySymbol)})`;
+  return $listItem;
 }
 
-function setCurrencyExchanges(data) {
-  const currencyValues = Object.values(data.rates);
-  let increment = 0;
-
-  for(let i = 0; i < Object.keys(currencies).length - 1; i += 1) {
-    if(Object.keys(currencies)[i] === data.base) {
-      increment += 1
-    };
-
-    const listItem = createListItem(currencyValues[i], i, increment);
-    $list.appendChild(listItem)
+function setCurrencyExchange(data) {
+  const rates = data.rates;
+  const currencyValues = Object.values(rates);
+  const currencySymbols = Object.keys(rates);
+  
+  for (let i = 0; i < currencySymbols.length; i += 1) {
+    const listItem = createListItem(currencyValues[i], currencySymbols[i]);
+    $list.appendChild(listItem);
   }
 }
 
 function openModal() {
-  $modal.classList.add('active');
-  $overlay.classList.add('active');
+  $modalElement.classList.add('active');
+  $overlayElement.classList.add('active');
 }
 
-export function showAllCurrencyExchanges(data) {
+export function displayCurrencyExchange(data) {
   clearResults();
   clearModal();
-  setHeaderInformation(data);
-  setCurrencyExchanges(data);
+  setHeaderInfo(data);
+  setCurrencyExchange(data);
   openModal();
 }
 
 const $backButton = document.querySelector('[data-button="back"]');
 
 function hideModal() {
-  $modal.classList.remove('active');
-  $overlay.classList.remove('active');
+  $modalElement.classList.remove('active');
+  $overlayElement.classList.remove('active');
 }
 
 function handleBackButton() {
